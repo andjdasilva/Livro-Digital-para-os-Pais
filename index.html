@@ -553,6 +553,54 @@ h1.page-title,h2.page-title,.modal-title,.stats-title{color:#15122B;}
   .capa-img{width:250px;}
 }
 
+/* ============================================
+   TABLET (769px – 1024px) — sidebar em gaveta
+   para maximizar a área de leitura
+   ============================================ */
+@media(min-width:769px) and (max-width:1024px){
+  :root{ --topbar-h:58px; }
+
+  /* Mostra o botão de menu e usa a sidebar como gaveta */
+  #menu-toggle{ display:flex; }
+  #sidebar{
+    width:300px;
+    transform:translateX(-100%);
+    transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    z-index:88;
+    box-shadow:4px 0 28px rgba(0,0,0,0.45);
+  }
+  #sidebar.mobile-open{ transform:translateX(0); }
+
+  /* Conteúdo ocupa a largura toda com respiro confortável */
+  #main{ left:0 !important; padding:26px 32px 70px; }
+  .page-card{ padding:34px 32px; }
+  .page-card,.capa-page,.final-only-card,.page-nav{ max-width:720px; }
+
+  /* Tipografia levemente maior que no celular */
+  .body-text{ font-size:0.98rem; line-height:1.85; }
+  h1.page-title{ font-size:1.8rem; }
+  h2.page-title{ font-size:1.5rem; }
+
+  /* Botões do topo maiores e tocáveis */
+  .topbar-btn,#stats-badge{ height:40px; }
+
+  /* Painéis laterais não ocupam a tela inteira no tablet */
+  #stats-panel{ width:360px; }
+  #resumo-panel{ width:400px; }
+
+  /* Imagens flutuantes mantêm o float, mas limitadas */
+  .img-right,.img-left{ max-width:300px; }
+}
+
+/* ============================================
+   DESKTOP GRANDE (>1440px) — mais respiro
+   ============================================ */
+@media(min-width:1441px){
+  #main{ padding:40px; }
+  .page-card,.capa-page,.final-only-card,.page-nav{ max-width:900px; }
+  .body-text{ font-size:1.05rem; }
+}
+
 </style>
 </head>
 <body>
@@ -1342,7 +1390,7 @@ const modals = {
   'roteiro-5':{icon:'💜',title:'Oração da Criança — 2 minutos',subtitle:'O momento mais sagrado',text:'Diga: <em>"Agora é a sua vez. Fale com Deus do jeito que você quiser."</em><br><br>Fique em silêncio. Não interrompa. Não corrija.<br><br>Se a criança ficar quieta, está tudo bem — silêncio também é oração.'},
   'roteiro-6':{icon:'💛',title:'Oração dos Pais — 2 minutos',subtitle:'Mostre que você ouviu de verdade',text:'"Deus, [nome] compartilhou que hoje foi difícil por [o que ela disse]. Cuida disso.<br><br>Ela pediu por [o que pediu]. Nós também pedimos.<br><br>Obrigado por ela. Abençoa ela nessa noite. Amém."<br><br>💡 <em>Quando a criança ouve os pais orando pelo que ela compartilhou, sente amor de um jeito único.</em>'},
   'oracao-completa-10min':{icon:'⭐',title:'Roteiro Completo — 10 Minutos',subtitle:'Para crianças de 7 a 12 anos',text:'1️⃣ <strong>GRATIDÃO (2 min)</strong> — 2 coisas boas do dia<br>2️⃣ <strong>CONVERSA (2 min)</strong> — Como foi? O que foi difícil?<br>3️⃣ <strong>VERSÍCULO (1 min)</strong> — Ler e conversar<br>4️⃣ <strong>PEDIDO (1 min)</strong> — A criança lidera<br>5️⃣ <strong>ORAÇÃO DA CRIANÇA (2 min)</strong> — Com as próprias palavras<br>6️⃣ <strong>ORAÇÃO DOS PAIS (2 min)</strong> — Baseada no que foi compartilhado'},
-  'fe-frase-1':{icon:'💬',title:'"Você pode falar com Deus sobre tudo."',subtitle:'Expandindo a visão da criança sobre oração',text:'Muitas crianças acham que Deus só quer ouvir "coisas s��rias".<br><br>✅ <strong>O que liberta:</strong> A criança pode falar sobre o cachorro favorito, o amigo, o brinquedo...<br><br>💡 <em>Isso cria uma relação com Deus que vai além da "hora da oração".</em>'},
+  'fe-frase-1':{icon:'💬',title:'"Você pode falar com Deus sobre tudo."',subtitle:'Expandindo a visão da criança sobre oração',text:'Muitas crianças acham que Deus só quer ouvir "coisas s�����rias".<br><br>✅ <strong>O que liberta:</strong> A criança pode falar sobre o cachorro favorito, o amigo, o brinquedo...<br><br>💡 <em>Isso cria uma relação com Deus que vai além da "hora da oração".</em>'},
   'fe-frase-2':{icon:'💕',title:'"Deus se importa com o que você sente."',subtitle:'Conectando emoções com fé',text:'Crianças acham que seus sentimentos são "pequenos demais" para Deus.<br><br>✅ <strong>Como usar:</strong> "Quando você está com raiva, com medo ou triste — pode contar para Deus. Ele se importa."<br><br>✅ <strong>Complemente com:</strong> "Os salmos na Bíblia são cheios de pessoas que contaram exatamente o que sentiam."'},
   'fe-frase-3':{icon:'💚',title:'"Orar é falar com sinceridade."',subtitle:'Autenticidade acima da performance',text:'✅ <strong>Quando usar:</strong> Quando a criança se sentir inibida ou "decorar" orações.<br><br>✅ <strong>Complemente com:</strong> "Uma oração curta e torta com amor é mais bonita para Deus do que a elaborada dita sem sentir."'},
   'fe-frase-4':{icon:'💛',title:'"A oração ajuda o coração a descansar."',subtitle:'O benefício emocional da oração',text:'✅ <strong>Use quando a criança estiver agitada ou ansiosa:</strong><br>"Vamos orar? Depois você vai se sentir mais leve."<br><br>✅ <strong>Comprove com o exemplo:</strong><br>"Quando eu oro, sinto que meu coração para de correr." 💛'},
@@ -1664,7 +1712,7 @@ function toggleSidebar(){
 }
 
 function closeSidebarMobile(){
-  if(window.innerWidth <= 768){
+  if(window.innerWidth <= 1024){
     const s = document.getElementById('sidebar');
     const o = document.getElementById('sidebar-overlay');
     if(s) s.classList.remove('mobile-open');
@@ -1672,6 +1720,17 @@ function closeSidebarMobile(){
     document.body.style.overflow = '';
   }
 }
+
+// Ao redimensionar para desktop, garante que a gaveta e o scroll voltem ao normal
+window.addEventListener('resize', function(){
+  if(window.innerWidth > 1024){
+    const s = document.getElementById('sidebar');
+    const o = document.getElementById('sidebar-overlay');
+    if(s) s.classList.remove('mobile-open');
+    if(o) o.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
 
 // Wrap goToPage to close sidebar on mobile
 const _origGoToPage = goToPage;
