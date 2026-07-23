@@ -1342,7 +1342,7 @@ const modals = {
   'roteiro-5':{icon:'💜',title:'Oração da Criança — 2 minutos',subtitle:'O momento mais sagrado',text:'Diga: <em>"Agora é a sua vez. Fale com Deus do jeito que você quiser."</em><br><br>Fique em silêncio. Não interrompa. Não corrija.<br><br>Se a criança ficar quieta, está tudo bem — silêncio também é oração.'},
   'roteiro-6':{icon:'💛',title:'Oração dos Pais — 2 minutos',subtitle:'Mostre que você ouviu de verdade',text:'"Deus, [nome] compartilhou que hoje foi difícil por [o que ela disse]. Cuida disso.<br><br>Ela pediu por [o que pediu]. Nós também pedimos.<br><br>Obrigado por ela. Abençoa ela nessa noite. Amém."<br><br>💡 <em>Quando a criança ouve os pais orando pelo que ela compartilhou, sente amor de um jeito único.</em>'},
   'oracao-completa-10min':{icon:'⭐',title:'Roteiro Completo — 10 Minutos',subtitle:'Para crianças de 7 a 12 anos',text:'1️⃣ <strong>GRATIDÃO (2 min)</strong> — 2 coisas boas do dia<br>2️⃣ <strong>CONVERSA (2 min)</strong> — Como foi? O que foi difícil?<br>3️⃣ <strong>VERSÍCULO (1 min)</strong> — Ler e conversar<br>4️⃣ <strong>PEDIDO (1 min)</strong> — A criança lidera<br>5️⃣ <strong>ORAÇÃO DA CRIANÇA (2 min)</strong> — Com as próprias palavras<br>6️⃣ <strong>ORAÇÃO DOS PAIS (2 min)</strong> — Baseada no que foi compartilhado'},
-  'fe-frase-1':{icon:'💬',title:'"Você pode falar com Deus sobre tudo."',subtitle:'Expandindo a visão da criança sobre oração',text:'Muitas crianças acham que Deus só quer ouvir "coisas sérias".<br><br>✅ <strong>O que liberta:</strong> A criança pode falar sobre o cachorro favorito, o amigo, o brinquedo...<br><br>💡 <em>Isso cria uma relação com Deus que vai além da "hora da oração".</em>'},
+  'fe-frase-1':{icon:'💬',title:'"Você pode falar com Deus sobre tudo."',subtitle:'Expandindo a visão da criança sobre oração',text:'Muitas crianças acham que Deus só quer ouvir "coisas s��rias".<br><br>✅ <strong>O que liberta:</strong> A criança pode falar sobre o cachorro favorito, o amigo, o brinquedo...<br><br>💡 <em>Isso cria uma relação com Deus que vai além da "hora da oração".</em>'},
   'fe-frase-2':{icon:'💕',title:'"Deus se importa com o que você sente."',subtitle:'Conectando emoções com fé',text:'Crianças acham que seus sentimentos são "pequenos demais" para Deus.<br><br>✅ <strong>Como usar:</strong> "Quando você está com raiva, com medo ou triste — pode contar para Deus. Ele se importa."<br><br>✅ <strong>Complemente com:</strong> "Os salmos na Bíblia são cheios de pessoas que contaram exatamente o que sentiam."'},
   'fe-frase-3':{icon:'💚',title:'"Orar é falar com sinceridade."',subtitle:'Autenticidade acima da performance',text:'✅ <strong>Quando usar:</strong> Quando a criança se sentir inibida ou "decorar" orações.<br><br>✅ <strong>Complemente com:</strong> "Uma oração curta e torta com amor é mais bonita para Deus do que a elaborada dita sem sentir."'},
   'fe-frase-4':{icon:'💛',title:'"A oração ajuda o coração a descansar."',subtitle:'O benefício emocional da oração',text:'✅ <strong>Use quando a criança estiver agitada ou ansiosa:</strong><br>"Vamos orar? Depois você vai se sentir mais leve."<br><br>✅ <strong>Comprove com o exemplo:</strong><br>"Quando eu oro, sinto que meu coração para de correr." 💛'},
@@ -1503,7 +1503,7 @@ function applyHighlight(color){
     const span=document.createElement('span');
     span.className='highlight-'+color;span.textContent=text;
     range.deleteContents();range.insertNode(span);sel.removeAllRanges();
-    grifos.push({text:text.substring(0,80)+(text.length>80?'...':''),color:color,page:currentPage+1});
+    grifos.push({text:text,color:color,page:currentPage+1});
     updateResumo();updateStats();
   }catch(e){}
   document.getElementById('hl-toolbar').style.display='none';
@@ -1513,7 +1513,8 @@ function updateResumo(){
   const content=document.getElementById('resumo-content');
   if(grifos.length===0){content.innerHTML='<p style="color:#aaa;font-size:0.87rem;text-align:center;padding:20px 0;">Grife textos para que apareçam aqui como resumo automático ✨</p>';return;}
   const colors={yellow:'#FFD84D',pink:'#FF8FCF',blue:'#8ED8FF'};
-  content.innerHTML=`<p style="font-size:0.78rem;color:#aaa;margin-bottom:12px;">${grifos.length} trecho(s) grifado(s)</p>`+grifos.map(g=>`<div class="resumo-item" style="border-left-color:${colors[g.color]||'#ccc'}"><strong style="font-size:0.75rem;color:#aaa;">Pág. ${g.page}</strong><br>${g.text}</div>`).join('');
+  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  content.innerHTML=`<p style="font-size:0.78rem;color:#aaa;margin-bottom:12px;">${grifos.length} trecho(s) grifado(s)</p>`+grifos.map(g=>`<div class="resumo-item" style="border-left-color:${colors[g.color]||'#ccc'};white-space:pre-wrap;word-break:break-word;"><strong style="font-size:0.75rem;color:#aaa;">Pág. ${g.page}</strong><br>${esc(g.text)}</div>`).join('');
 }
 
 function toggleStats(){
